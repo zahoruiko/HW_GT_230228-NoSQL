@@ -1,0 +1,48 @@
+Задача (1)
+вывести информацию по всем звонкам, вкл. поля:
+-- общая и сред. продолжительность
+-- ко-во звонков
+
+Решение:
+
+db.calls.aggregate([
+  {
+    '$group': {
+	'_id': '$user_id',
+	'totalcalls_quantity': {'$count': {} },
+	'total_calls_length': {'$sum': '$duration_secs'},
+	'avg_call_length': {'$avg': '$duration_secs'}
+    }
+  },
+  {
+    '$lookup': {
+	'localField': 'user_id',
+	'from': 'users',
+	'foreignField': 'id',
+	'as': 'user_info'
+    }
+  },
+])
+
+
+
+Задача (2)
+вывести сумму в EURO сладских остатков по всем товарам
+
+Решение:
+
+db.goods.aggregate([
+  {
+    '$project': {
+      '_id': '_id',
+      'item_sum': {
+        '$multiply': ['$quantity', '$price']
+    }
+  },
+  {
+    '$group': {
+      '_id': null,
+      'total_sum': {'$sum': '$item_sum'}
+    }
+  }
+])
