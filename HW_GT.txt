@@ -1,9 +1,9 @@
-Задача (1)
-вывести информацию по всем звонкам, вкл. поля:
--- общая и сред. продолжительность
--- ко-во звонков
+Task (1)
+Bring information on all calls, including fields:
+- General and average duration
+- Number in calls
 
-Решение:
+Solution:
 
 db.calls.aggregate([
   {
@@ -26,10 +26,10 @@ db.calls.aggregate([
 
 
 
-Задача (2)
-вывести сумму в EURO сладских остатков по всем товарам
+Task (2)
+withdraw the amount of warehouse residues for all goods in Euro
 
-Решение:
+Solution:
 
 db.goods.aggregate([
   {
